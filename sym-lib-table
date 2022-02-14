@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "HV_TPI_tool")(type "KiCad")(uri "${KIPRJMOD}/HV_TPI_tool.kicad_sym")(options "")(descr ""))
+)
