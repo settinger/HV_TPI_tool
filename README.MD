@@ -18,7 +18,7 @@ To actually use this schematic, I made two designs: one to go with the USBasp an
 
 ![A KiCad render of the HVTPI PCB](USBasp_HV_TPI_3.png)
 
-The USBasp HVTPI tool mates nicely with its 2×5 IDC headers. There are two SPDT switches, one to switch between normal TPI and HVTPI modes, and another to combine the two data lines as described in [this application note](http://ww1.microchip.com/downloads/en/AppNotes/doc8373.pdf)
+The USBasp HVTPI tool mates nicely with its 2×5 IDC headers. There are two SPDT switches, one to switch between normal TPI and HVTPI modes, and another to combine the two data lines as described in [this application note](http://ww1.microchip.com/downloads/en/AppNotes/doc8373.pdf):
 
 ![A diagram from a Microchip application note showing how it recommends connecting an ATtiny10 to a programmer with a 220Ω resistor on each data line](appnote.png)
 
@@ -45,3 +45,9 @@ The Arduino-compatible programmer is designed to sit in a breadboard. I original
 ![A photo of the earlier design, which is skinny and tall and has two pins at weird angles sticking out of the top](breadboard_HV_TPI_3.jpg)
 
 This is not very helpful, so later I went back and put it in a more reasonable 10-DIP layout. Because the Arduino program expects both MISO and MOSI lines to connect to the TPI DATA line via 220Ω resistors, I built that into this board as well. Again, there is no need to make any changes to the normal TPI programming workflow. I know the Arduino sketch has some "HVP" options available, but with this board they are wholly unnecessary.
+
+I'm happily using these with both the USBasp and the Arduino for HVTPI programming. I had a hard time finding good resources for HVTPI and had to do a lot of learning-by-doing, but hopefully I can pass that knowledge along and save someone some trouble.
+
+# Note to self
+
+After setting the ATtiny4/5/9/10/20/40 fuse bits to `0xFE` (or whatever) to enable 12V reset, avrdude can't just overwrite the fuses with `0xFF`. Using the flags `-x section_config -e` will clear the bits.
